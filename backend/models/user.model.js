@@ -25,6 +25,17 @@ const userSchema = new mongoose.Schema({
     type:String,
     enum:["user","owner","deliveryBoy"],
     required:true,
+  },
+  resetOtp :{
+    type:String
+
+  },
+  isOtpVerified:{
+    type:Boolean,
+    default:false
+  },
+  optExpires:{
+    type:Date
   }
 
 
@@ -34,3 +45,6 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 
 export default User;
+
+
+
