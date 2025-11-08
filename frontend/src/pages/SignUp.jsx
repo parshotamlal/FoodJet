@@ -10,6 +10,8 @@ import axios from "axios";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 import  {auth}  from "../../Firebase";
+import { useDispatch } from "react-redux";
+import { setUserData } from "../redux/userSlice.js";
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,6 +22,7 @@ function SignUp() {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const handleSignUp = async () => {
     if (!fullName || !email || !mobile || !password) {
@@ -32,6 +35,8 @@ function SignUp() {
         { fullName, email, password, mobile, role },
         { withCredentials: true }
       );
+      dispatch(setUserData(response.data))
+
 
       console.log(" Signup Success:", response.data);
       toast.success("Account created successfully!");
@@ -67,6 +72,7 @@ const handleGoogleAuth = async () => {
       },
       { withCredentials: true }
     );
+    dispatch(setUserData(data))
 
     console.log("Server Response:", data);
 
@@ -120,7 +126,7 @@ const handleGoogleAuth = async () => {
             value={mobile}
             type="text"
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-orange-500 border-[#ddd]"
-            placeholder="Enter your Mobile Number"
+            placeholder="Enter your Mobile Number" required
           />
         </div>
 
@@ -133,7 +139,7 @@ const handleGoogleAuth = async () => {
               value={password}
               type={showPassword ? "text" : "password"}
               className="w-full border rounded-lg px-3 py-2 pr-10 border-[#ddd] focus:outline-none focus:border-orange-500"
-              placeholder="Enter your 8 character password"
+              placeholder="Enter your 8 character password" required
             />
             <button
               onClick={() => setShowPassword((prev) => !prev)}

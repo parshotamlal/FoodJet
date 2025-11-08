@@ -4,16 +4,35 @@ import "react-toastify/dist/ReactToastify.css";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import ForgotPassword from "./pages/ForgotPassword";
+import useGetCurrentUser from "./hooks/userGetCurrentUser";
+import { useSelector } from "react-redux";
+import Home from "./pages/Home";
+import useGetCity from "./hooks/useGetCity";
 
 function AppRoutes() {
+  useGetCurrentUser();
+  useGetCity();
+  const { userData } = useSelector((state) => state.user);
   return (
     <>
       <ToastContainer position="top-right" />
       <Routes>
-        <Route path="/" element={<Navigate to="/signin" replace />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/forget-password" element={< ForgotPassword/>} />
+        <Route
+          path="/signup"
+          element={!userData ? <SignUp /> : <Navigate to={"/"} />}
+        />
+        <Route
+          path="/signin"
+          element={!userData ? <SignIn /> : <Navigate to={"/"} />}
+        />
+        <Route
+          path="/forget-password"
+          element={!userData ? <ForgotPassword /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/"
+          element={userData ? <Home /> : <Navigate to={"signup"} />}
+        />
       </Routes>
     </>
   );

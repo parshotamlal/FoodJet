@@ -9,6 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import  {auth}  from "../../Firebase";
+import { useDispatch } from "react-redux";
+import { setUserData } from "../redux/userSlice.js";
 
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,6 +18,7 @@ function SignIn() {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+  const dispatch=useDispatch()
 
   const handleSignIn = async () => {
     if (!email || !password) {
@@ -28,6 +31,7 @@ function SignIn() {
         { email, password },
         { withCredentials: true }
       );
+      dispatch(setUserData(response.data))
 
       console.log("✅ Signup Success:", response.data);
       toast.success("Account Login successfully!");
@@ -58,6 +62,10 @@ function SignIn() {
         },
         { withCredentials: true }
       );
+
+      dispatch(setUserData(data))
+
+
   
       console.log("Server Response:", data);
       toast.success("Login successfully")
