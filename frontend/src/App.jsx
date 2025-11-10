@@ -12,7 +12,7 @@ import useGetCity from "./hooks/useGetCity";
 function AppRoutes() {
   useGetCurrentUser();
   useGetCity();
-  const { userData } = useSelector((state) => state.user);
+  const { userData, city } = useSelector((state) => state.user);
   return (
     <>
       <ToastContainer position="top-right" />

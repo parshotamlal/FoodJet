@@ -1,6 +1,10 @@
+import Navbar from "./Navbar";
+
 function OwnerDashboard() {
   return (
-    <div>OwnerDashboard</div>
+    <div>
+      <Navbar/> </div>
+    
   )
 }
 

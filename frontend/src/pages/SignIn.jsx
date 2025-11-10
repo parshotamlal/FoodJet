@@ -63,7 +63,7 @@ function SignIn() {
         { withCredentials: true }
       );
 
-      dispatch(setUserData(data))
+      dispatch(setUserData(data.user))
 
 
   
