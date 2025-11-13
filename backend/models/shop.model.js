@@ -29,13 +29,13 @@ const shopSchema = new mongoose.Schema({
     item:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Item",
-        required:true
+        required:false
     }
 
 }, { timestamps: true }); 
 
 // Create the model
-const Shop = mongoose.model("User", shopSchema);
+const Shop = mongoose.model("Shop", shopSchema);
 
 export default Shop;
 

@@ -1,6 +1,6 @@
-import Item from "../models/item.model";
-import Shop from "../models/shop.model";
-import uploadOnCloudinary from "../utils/cloudinary";
+import Item from "../models/item.model.js";
+import Shop from "../models/shop.model.js";
+import uploadOnCloudinary from "../utils/cloudinary.js";
 
 export const addItem = async (req, res) => {
   try {
@@ -25,8 +25,10 @@ export const addItem = async (req, res) => {
     return res.status(201).json({
       success: true,
       message: "Item created successfully",
-      item,
-    });
+      shop,
+    }); 
+
+    console.log(item)
   } catch (error) {
     return res.status(500).json({
       success: false,

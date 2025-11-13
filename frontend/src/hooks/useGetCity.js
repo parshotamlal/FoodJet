@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCity } from "../redux/userSlice";
+import { setcurrentCity, setcurrentState } from "../redux/userSlice";
 
 function useGetCity() {
   const dispatch = useDispatch();
@@ -23,9 +23,12 @@ function useGetCity() {
           data?.address?.town ||
           data?.address?.village ||
           "Unknown";
+        const detectedState =
+          data?.address?.state ||
+          "Unknown";
 
-        dispatch(setCity(detectedCity));
-        console.log("Detected City:", detectedCity);
+        dispatch(setcurrentCity(detectedCity));
+        dispatch(setcurrentState(detectedState));
       } catch (error) {
         console.log("City Fetch Error:", error);
       }

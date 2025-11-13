@@ -13,8 +13,9 @@ import ServerUrl from "../Url/ServerUrl";
 import { setUserData } from "../redux/userSlice";
 
 function Navbar() {
+  
   const navigate = useNavigate();
-  const { userData, city } = useSelector((state) => state.user);
+  const { userData, currentCity } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [showSearch, setShowSearch] = useState(false);
 
@@ -47,7 +48,7 @@ function Navbar() {
         {/* Location */}
         <div className="flex items-center gap-2 border-r border-gray-300 pr-4">
           <IoLocationSharp className="text-[#ff4d2d] text-xl" />
-          <p className="font-semibold text-gray-800">{city}</p>
+          <p className="font-semibold text-gray-800">{currentCity}</p>
         </div>
 
         {/* Search */}

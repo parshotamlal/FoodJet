@@ -1,14 +1,11 @@
 import express from "express"
-import isAuth from "../middleware/isAuth"
-import { addItem, editItem } from "../controllers/item.controller"
-import { upload } from "../middleware/multer"
+import isAuth from "../middleware/isAuth.js"
+import { addItem, editItem } from "../controllers/item.controller.js"
+import { upload } from "../middleware/multer.js"
 
+const itemRouter = express.Router()
 
+itemRouter.post("/add-item", isAuth, upload.single("image"), addItem)
+itemRouter.put("/update-item/:id", isAuth, upload.single("image"), editItem)
 
-const itemRouter =express.Router()
-
-
-
-itemRouter.post("/additem",isAuth,upload.single("image"),addItem)
-itemRouter.put("/updateitem",isAuth,upload.single("image"),editItem)
 export default itemRouter
